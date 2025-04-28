@@ -1,10 +1,12 @@
-"use client";
+"use client"
 
 import React from "react";
 import { useFetch } from "@/hooks/useFetch";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, Star } from "lucide-react";
+import { useParams } from "next/navigation";
+
 
 type Product = {
   id: number;
@@ -19,9 +21,12 @@ type Product = {
   };
 };
 
-function Page({ params }: { params: { id: string } }) {
+
+function Page() {
+    const {id} = useParams()
+
   const { data, error, loading } = useFetch<Product>(
-    `https://fakestoreapi.com/products/${params.id}`
+    `https://fakestoreapi.com/products/${id}`
   );
 
   if (loading) {
